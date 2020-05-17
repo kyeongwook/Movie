@@ -45,3 +45,15 @@ if __name__ == '__main__':
     parsing_movies()
     parsing_rating()
     parsing_users()
+
+
+data_1 = pd.merge(data_movies, data_rating, how = 'inner', on='movieid')
+rating_movie_title = data_1.pivot(index= 'userid',
+                                 columns = 'title',
+                                 values = 'rate')
+rating_movie_title.head(10)
+
+data_2 = pd.merge(data_users, data_rating, how = 'inner', on='userid')
+data_2 = data_2.drop('zipcode',axis=1)
+data_2 = data_2.drop('time',axis=1)
+data_2
